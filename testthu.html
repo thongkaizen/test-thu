@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Kiểm Tra Nghe</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .question { margin: 20px; }
+        input { padding: 8px; margin-top: 10px; }
+        button { padding: 10px; margin-top: 10px; cursor: pointer; }
+        .result { font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Bài Kiểm Tra Nghe</h2>
+    <div class="question">
+        <p><strong>Nghe và nhập đáp án:</strong></p>
+        <audio controls>
+            <source src="bài tập nghe giờ -1.mp3" type="audio/mp3">
+            Trình duyệt của bạn không hỗ trợ audio.
+        </audio>
+        <br>
+        <input type="text" id="answer1" placeholder="Nhập đáp án câu 1">
+        <input type="text" id="answer2" placeholder="Nhập đáp án câu 2">
+        <input type="text" id="answer3" placeholder="Nhập đáp án câu 3">
+        <input type="text" id="answer4" placeholder="Nhập đáp án câu 4">
+        <input type="text" id="answer5" placeholder="Nhập đáp án câu 5">
+    </div>
+    <button onclick="submitQuiz()">Nộp bài</button>
+    <div id="score" class="result"></div>
+
+    <script>
+        const correctAnswers = ["午前１：２０", "午後１：１２", "午前３時半", "午後４：３９", "午前６：４５"]; // Đáp án đúng
+        
+        function submitQuiz() {
+            let score = 0;
+            let total = correctAnswers.length;
+            let feedback = "<h3>Kết quả:</h3>";
+            
+            for (let i = 0; i < total; i++) {
+                let userAnswer = document.getElementById(`answer${i+1}`).value.trim();
+                if (userAnswer === correctAnswers[i]) {
+                    score += 10;
+                    feedback += `<p>Câu ${i+1}: ✅ Đúng</p>`;
+                } else {
+                    feedback += `<p>Câu ${i+1}: ❌ Sai (Đáp án: ${correctAnswers[i]})</p>`;
+                }
+            }
+            
+            document.getElementById("score").innerHTML = `Bạn đạt ${score}/${total * 10} điểm!<br>${feedback}`;
+        }
+    </script>
+</body>
+</html>
